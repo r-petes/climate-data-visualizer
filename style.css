@@ -1,0 +1,33 @@
+#date1Search {
+    width: fit-content;
+    margin-right: 0;
+    margin-left: auto;
+    
+}
+
+#date2Search {
+    width: fit-content;
+    margin-right: auto;
+    margin-left: 0;
+}
+
+#locationSearch {
+    width: fit-content;
+    margin: 1%;
+}
+
+#prompt {
+    text-align: center;
+    font-family: Montserrat;
+    font-weight: 100;
+}
+
+#searchBar {
+    background: #7B8592;
+    padding: 2%;
+}
+
+
+body {
+    background: rgba(123, 133, 146, 0.57);
+}
