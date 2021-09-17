@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
         data = JSON.parse(data);
         let output = '';
         
-        // create a button for each state
+        // Create a button for each state
         data.forEach(function(states) {
             output += `<option class="dropdown-item selected_state" id="${states.state_code}">${states.state_name}</option>\r\n`;            
         });
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 
 
-// if the user has selected a state, populate the counties for that state (the id for the counties are the FIPS codes)
+// If the user has selected a state, populate the counties for that state (the id for the counties are the FIPS codes)
 
 document.getElementById("select_state").onchange = populateCountyDropdown ;
 
@@ -42,7 +42,7 @@ function populateCountyDropdown() {
     .then((data) => { 
         data = JSON.parse(data);
         let output = '';
-        // create a button for each state
+        // Create a button for each county in selected state
         data.forEach(function(state_county_data) {
             if (value == state_county_data.state_code) {
                 output += `<option class="dropdown-item" id="${state_county_data.county_code}">${state_county_data.county_name}</option>\r\n`;   
