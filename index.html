@@ -19,14 +19,24 @@
     <div id="searchBar">
         <h1 id="prompt">Enter a zipcode/city and  two dates to compare historical weather data:</h1>
         <!-- Include search buttons below here -->
-        <div class="form-group">
-            <div class="row justify-content-around"><input class="form-control" type="search" id="locationSearch" placeholder="Enter Zipcode/City"></div>
-            <div class="row">
-                <div class="col-6"><input class="form-control" type="search" id="date1Search" placeholder="Enter start date"></div>
-                <div  class="col-6"><input class="form-control" type="search" id="date2Search" placeholder="Enter end date"></div>
+        <div class="row">
+            <div class="col-12">
+                <select class="form-select" id="select_state">
+                <option selected disabled>Select a state</option>
+                </select>
             </div>
+            <div class="col-12">
+                <select class="form-select" id="select_county">
+                <option selected disabled>Select a county</option>
+                </select>
+            </div>
+            <div  class="col-6"><input class="form-control" type="search" id="date1Search" placeholder="Enter start date"></div>
+            <div  class="col-6"><input class="form-control" type="search" id="date2Search" placeholder="Enter end date"></div>
         </div>
     </div>
+
+    <!-- Our JavaScript -->
+    <script src="script.js"></script>
     
 </body>
 </html>
