@@ -91,6 +91,7 @@ function getAPIData() {
     // Get the value from above
     var state = selected_state.options[selected_state.selectedIndex].text;
     var county = selected_county.options[selected_county.selectedIndex].text;
+    var state_code;
     // Base url that needs to be added onto with state and county
     var url = "https://aqs.epa.gov/data/api/annualData/byCounty?email=rachel.peterson.5683@gmail.com&key=tealheron74&param=44201&bdate=20160101&edate=20160228";
     
@@ -98,6 +99,7 @@ function getAPIData() {
     fetchStates().then(function(data) {
         data.forEach(function(states) {
             if(state == states.state_name) {
+                state_code = states.state_code;
                 url += "&state=" + states.state_code;
             }         
         });
@@ -109,11 +111,12 @@ function getAPIData() {
     //
     fetchState_County_Data().then(function(data) {
         data.forEach(function(state_county_data) {
-            if(county == state_county_data.county_name) {
+            if(county == state_county_data.county_name && state_code == state_county_data.state_code) {
                 url += "&county=" + state_county_data.county_code;
-                fetch(url)
+                console.log(county);
+                /*fetch(url)
                     .then(response => response.json())
-                    .then(data => console.log(data));
+                    .then(data => console.log(data));*/
             }         
         });
     });
