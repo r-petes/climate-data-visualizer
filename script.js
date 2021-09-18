@@ -53,6 +53,61 @@ function populateCountyDropdown() {
     .catch((err) => console.log(err));
 }
 
+document.getElementById("fetch_data_button").addEventListener("click", getAPIData); 
+
+function fetchStates() {
+
+    var jsondata;
+
+    return fetch('states.json')
+        .then(function(response) {
+            return response.json();
+    })  
+        .then(function(json) {
+            return json;
+    });
+}
+
+function fetchState_County_Data() {
+
+    var jsondata;
+
+    return fetch('state_county_data.json')
+        .then(function(response) {
+            return response.json();
+    })  
+        .then(function(json) {
+            return json;
+    });
+}
+
+function getAPIData() {
+
+    var selected_state = document.getElementById('select_state');
+    var selected_county = document.getElementById('select_county');
+    var state = selected_state.options[selected_state.selectedIndex].text;
+    var county = selected_county.options[selected_county.selectedIndex].text;
+    var url = "https://aqs.epa.gov/data/api/annualData/byCounty?email=rachel.peterson.5683@gmail.com&key=tealheron74&param=44201&bdate=20160101&edate=20160228";
+    
+    fetchStates().then(function(data) {
+        data.forEach(function(states) {
+            if(state == states.state_name) {
+                url += "&state=" + states.state_code;
+            }         
+        });
+    });
+
+    fetchState_County_Data().then(function(data) {
+        data.forEach(function(state_county_data) {
+            if(county == state_county_data.county_name) {
+                url += "&county=" + state_county_data.county_code;
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => console.log(data));
+            }         
+        });
+    });
+}
 
 // Once the user has filled out both the year range and county/city data, call the API (using Fetch?)
 
