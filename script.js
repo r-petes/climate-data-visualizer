@@ -53,6 +53,74 @@ function populateCountyDropdown() {
     .catch((err) => console.log(err));
 }
 
+document.getElementById("fetch_data_button").addEventListener("click", getAPIData); 
+
+// Fetch states.json data
+function fetchStates() {
+
+    var jsondata;
+
+    return fetch('states.json')
+        .then(function(response) {
+            return response.json();
+    })  
+        .then(function(json) {
+            return json;
+    });
+}
+
+// Fetch state.county_data.json data
+function fetchState_County_Data() {
+
+    var jsondata;
+
+    return fetch('state_county_data.json')
+        .then(function(response) {
+            return response.json();
+    })  
+        .then(function(json) {
+            return json;
+    });
+}
+
+function getAPIData() {
+
+    // Get selected state and county divs
+    var selected_state = document.getElementById('select_state');
+    var selected_county = document.getElementById('select_county');
+    // Get the value from above
+    var state = selected_state.options[selected_state.selectedIndex].text;
+    var county = selected_county.options[selected_county.selectedIndex].text;
+    var state_code;
+    // Base url that needs to be added onto with state and county
+    var url = "https://aqs.epa.gov/data/api/annualData/byCounty?email=rachel.peterson.5683@gmail.com&key=tealheron74&param=44201&bdate=20160101&edate=20160228";
+    
+    // Call function to get states data and compare to dropdown state
+    fetchStates().then(function(data) {
+        data.forEach(function(states) {
+            if(state == states.state_name) {
+                state_code = states.state_code;
+                url += "&state=" + states.state_code;
+            }         
+        });
+    });
+
+    // Call function to get state_county_data and compare to dropdown county, also finally grab data with base url 
+    //
+    // ** Needs to be reworked **
+    //
+    fetchState_County_Data().then(function(data) {
+        data.forEach(function(state_county_data) {
+            if(county == state_county_data.county_name && state_code == state_county_data.state_code) {
+                url += "&county=" + state_county_data.county_code;
+                console.log(county);
+                /*fetch(url)
+                    .then(response => response.json())
+                    .then(data => console.log(data));*/
+            }         
+        });
+    });
+}
 
 // Once the user has filled out both the year range and county/city data, call the API (using Fetch?)
 
