@@ -114,13 +114,48 @@ function getAPIData() {
             if(county == state_county_data.county_name && state_code == state_county_data.state_code) {
                 url += "&county=" + state_county_data.county_code;
                 console.log(county);
-                /*fetch(url)
+                var xmlhttp = new XMLHttpRequest();
+                fetch(url)
                     .then(response => response.json())
-                    .then(data => console.log(data));*/
-            }         
-        });
-    });
+                    .then(data => console.log(data));
+                    xmlhttp.open("GET", url, true);
+                    xmlhttp.send();
+                    xmlhttp.onreadystatechange = function(){
+                    if (this.readyState == 4 && this.status == 200){
+                        var data = JSON.parse(this.responseText);
+                        var st = data.Data.map(function(elem){
+                        return elem.observation_count;
+                    });
+                     console.log(st)
+                    var code = data.Data.map(function(elem){
+                        return elem.county_code;
+                    });
+
+    var ctx = document.getElementById('canvas').getContext('2d');
+    var chart = new Chart(ctx, {
+    type: 'bar',
+                data: {
+                labels: st,
+                datasets: [{
+                    label: "Observation Count",
+                    data: code,
+                    backgroundColor: 'rgb(200, 200, 200)',
+                    borderColor: 'rgb(0, 150, 215)',
+                }]
+                },
+                options: {
+                responsive: 'true',
+                stacked: true,
+                }
+            });
+
+}         
 }
+};
+})}
+
+)}
+ 
 
 // Once the user has filled out both the year range and county/city data, call the API (using Fetch?)
 
@@ -128,7 +163,9 @@ function getAPIData() {
 
 // Generate charts based on the data pulled (using what tools?)
 
+
+
 // Push the charts to html
 
 
-
+ 
