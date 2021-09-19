@@ -1,7 +1,4 @@
 
-// TO DO: Drop down menus for the year range? 
-    // Populate based on the API data (from our own JSON file)
-
 // Populate the state dropdown from our JSON, the id of each state will be the FIPS code (used in the API for data retrieval)
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -223,7 +220,7 @@ function getAPIData() {
                     });
                     var anotherst = data.Data.map(function(elem) {
                         if (elem.pollutant_standard == "Ozone 8-hour 2015" || elem.pollutant_standard == "Ozone 1-hour 1979"){
-                            return elem.site_number;
+                            return [elem.local_site_name, elem.poc];
                         }
                         
                         });

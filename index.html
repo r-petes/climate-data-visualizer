@@ -21,14 +21,14 @@
     <div class="shadow-lg rounded" id="searchBar">
         <h1 class="shadow-lg rounded" id="prompt">SELECT YOUR PREFFERED STATE COUNTY, AND DATE TO SEE HISTORICAL PM 2.5 DATA COLLECTED ON THAT DAY. </h1>
 
-        <!-- Include search buttons below here -->
+        <!-- Search buttons -->
         <div class="row">
                 <select class="form-select" id="select_state">
-                <option selected disabled>Select a state</option>
+                    <option selected disabled>Select a state</option>
                 </select>
                 <select class="form-select" id="select_county">
                     <option selected disabled>Select a county</option>
-                    </select>
+                </select>
         </div>
         <div class="row">
             <div class="col-4">
@@ -52,6 +52,7 @@
             <div class = "ChartBox">
                 <canvas id="canvas2"></canvas>
             </div>
+            <p id="asteriskedNote">*note that if the graph displays as empty once all categories are selected, there is no data for those parameters</p>
         </div>
     </div>
 
@@ -59,12 +60,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
     <script src="script.js"></script>
     <!-- 
-    <script>
-        function updateChart(){
-            chart.data.data.datasets[0]
-            chart.update();
-        };
-    </script> -->
     
     
 </body>
