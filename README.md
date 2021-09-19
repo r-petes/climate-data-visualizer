@@ -1,5 +1,5 @@
-# weather-visualizer
-fall '21 OSU Hackathon project, climate data visualization web app
+# Pollutant visualizer
+Fall '21 OSU Hackathon project, climate data visualization web app
 
 ## Inspiration
 
