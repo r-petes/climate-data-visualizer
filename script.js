@@ -124,36 +124,69 @@ function getAPIData() {
                     if (this.readyState == 4 && this.status == 200){
                         var data = JSON.parse(this.responseText);
                         var st = data.Data.map(function(elem){
-                        return elem.observation_count;
+                    if (elem.pollutant_standard == "Ozone 8-hour 2015"){
+                        return elem.site_number;
+                    }
+                    if (elem.pollutant_standard == "PM 25 24-hour 2012"){
+                        return elem.site_number;
+                    }
                     });
                      console.log(st)
                     var code = data.Data.map(function(elem){
-                        return elem.county_code;
+                    if (elem.pollutant_standard == "Ozone 8-hour 2015"){
+                        return elem.arithmetic_mean;
+                    }
+                    });
+                    var pm = data.Data.map(function(elem){
+                    if (elem.pollutant_standard == "PM 25 24-hour 2012"){
+                        return elem.arithmetic_mean;
+                    }
                     });
 
-    var ctx = document.getElementById('canvas').getContext('2d');
-    var chart = new Chart(ctx, {
+                    
+
+    const ctx = document.getElementById('canvas').getContext('2d');
+    const chart = new Chart(ctx, {
     type: 'bar',
                 data: {
                 labels: st,
                 datasets: [{
-                    label: "Observation Count",
+                    label: ["Ozone"],
                     data: code,
-                    backgroundColor: 'rgb(200, 200, 200)',
-                    borderColor: 'rgb(0, 150, 215)',
+                    backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'],
+                    hoverBackgroundColor: "rgba(232,105,90,0.8)",
+                    borderColor: 'rgb(0, 0, 0)',
+                    borderWidth: 0.5
+                },
+                {
+                    label: ["PM 25 "],
+                    data: pm,
+                    backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    ],
+                    hoverBackgroundColor: "rgba(232,105,90,0.8)",
+                    borderColor: 'rgb(0, 0, 0)',
+                    borderWidth: 0.5
                 }]
                 },
                 options: {
                 responsive: 'true',
                 stacked: true,
                 }
+                
             });
-
+        
+            
 }         
 }
 };
 })}
-
 )}
  
 
