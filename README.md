@@ -3,7 +3,7 @@ fall '21 OSU Hackathon project, climate data visualization web app
 
 ## Inspiration
 
-
+Data visualization is important for being able to understand the scope of a problem and that we had trouble finding easily accessibly data of this type?
 
 ## What it does
 
