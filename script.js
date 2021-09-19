@@ -206,14 +206,6 @@ function getAPIData() {
             if(county == state_county_data.county_name && state_code == state_county_data.state_code) {
                 url += "&county=" + state_county_data.county_code;
                 console.log(county);
-                api_access
-                fetch(url)
-                    .then(response => response.json())
-                    .then(data => console.log(data));
-            }         
-        });
-    });
-
                 var xmlhttp = new XMLHttpRequest();
                 fetch(url)
                     .then(response => response.json())
@@ -250,10 +242,12 @@ function getAPIData() {
             });
 
 }         
-main
 }
 };
 
+})}
+
+)}
  
 
 // Once the user has filled out both the year range and county/city data, call the API (using Fetch?)
