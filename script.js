@@ -68,7 +68,14 @@ function populateDateDropdowns() {
 
         var month = i + 1;
 
-        document.getElementById('select_month').innerHTML += `<option class="dropdown-item">${month.toString()}</option>\r\n`;
+        if(month < 10) {
+
+            document.getElementById('select_month').innerHTML += `<option class="dropdown-item">0${month.toString()}</option>\r\n`;
+        }
+        else {
+
+            document.getElementById('select_month').innerHTML += `<option class="dropdown-item">${month.toString()}</option>\r\n`;
+        }
     }
 
     document.getElementById("select_year").removeEventListener("mousedown", populateDateDropdowns);   
@@ -90,7 +97,14 @@ function populateDayDropdown() {
 
             var day = i + 1;
     
-            document.getElementById('select_day').innerHTML += `<option class="dropdown-item">${day.toString()}</option>\r\n`;
+            if(day < 10) {
+
+                document.getElementById('select_day').innerHTML += `<option class="dropdown-item">0${day.toString()}</option>\r\n`;
+            }
+            else {
+
+                document.getElementById('select_day').innerHTML += `<option class="dropdown-item">${day.toString()}</option>\r\n`;
+            }
         }
     }
     else if (month == "4" || month == "6" || month == "9" || month == "11") {
@@ -99,8 +113,14 @@ function populateDayDropdown() {
 
             var day = i + 1;
     
-            document.getElementById('select_day').innerHTML += `<option class="dropdown-item">${day.toString()}</option>\r\n`;
-        }
+            if(day < 10) {
+
+                document.getElementById('select_day').innerHTML += `<option class="dropdown-item">0${day.toString()}</option>\r\n`;
+            }
+            else {
+
+                document.getElementById('select_day').innerHTML += `<option class="dropdown-item">${day.toString()}</option>\r\n`;
+            }        }
     }
     else {
         
@@ -108,8 +128,14 @@ function populateDayDropdown() {
 
             var day = i + 1;
     
-            document.getElementById('select_day').innerHTML += `<option class="dropdown-item">${day.toString()}</option>\r\n`;
-        }
+            if(day < 10) {
+
+                document.getElementById('select_day').innerHTML += `<option class="dropdown-item">0${day.toString()}</option>\r\n`;
+            }
+            else {
+
+                document.getElementById('select_day').innerHTML += `<option class="dropdown-item">${day.toString()}</option>\r\n`;
+            }        }
     }
 }
 
@@ -141,29 +167,28 @@ function fetchState_County_Data() {
     });
 }
 
-//document.getElementById("select_end_date").onchange = getAPIData;
+document.getElementById("select_day").onchange = getAPIData;
 
 function getAPIData() {
 
     // Get selected state and county divs
     var selected_state = document.getElementById('select_state');
     var selected_county = document.getElementById('select_county');
-    var selected_begin_date = document.getElementById('select_begin_date');
-    var selected_end_date = document.getElementById('select_end_date');
+    var selected_year = document.getElementById('select_year');
+    var selected_month = document.getElementById('select_month');
+    var selected_day = document.getElementById('select_day');
     // Get the value from above
     var state = selected_state.options[selected_state.selectedIndex].text;
     var county = selected_county.options[selected_county.selectedIndex].text;
-    var begin_date = selected_begin_date.options[selected_begin_date.selectedIndex].text;
-    var end_date = selected_end_date.options[selected_end_date.selectedIndex].text;
+    var year = selected_year.options[selected_year.selectedIndex].text;
+    var month = selected_month.options[selected_month.selectedIndex].text;
+    var day = selected_day.options[selected_day.selectedIndex].text;
+
     var state_code;
     // Base url that needs to be added onto with state and county
     var url = "https://aqs.epa.gov/data/api/annualData/byCounty?email=rachel.peterson.5683@gmail.com&key=tealheron74&param=44201";
-    
-    console.log(begin_date);
-    console.log(end_date);
 
-    url += "&bdate=" + begin_date + "0101";
-    url += "&edate=" + begin_date + "1231";
+    url += "&bdate=" + year + month + day + "&edate=" + year + month + day;
 
     // Call function to get states data and compare to dropdown state
     fetchStates().then(function(data) {
