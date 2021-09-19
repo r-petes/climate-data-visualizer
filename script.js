@@ -222,13 +222,13 @@ function getAPIData() {
                     
                     });
                     var anotherst = data.Data.map(function(elem) {
-                        if (elem.pollutant_standard == "PM25 24-hour 2006"){
+                        if (elem.pollutant_standard == "Ozone 8-hour 2015" || elem.pollutant_standard == "Ozone 1-hour 1979"){
                             return elem.site_number;
                         }
                         
                         });
                      console.log(st)
-                    var code = data.Data.map(function(elem){
+                    var ozone1 = data.Data.map(function(elem){
                     if (elem.pollutant_standard == "Ozone 8-hour 2015"){
                         return elem.arithmetic_mean;
                     }
@@ -238,11 +238,16 @@ function getAPIData() {
                         return elem.arithmetic_mean;
                     }
                     });
-                    var am = data.Data.map(function(elem){
+                    var ozone2 = data.Data.map(function(elem){
                         if (elem.pollutant_standard == "Ozone 1-hour 1979"){
                             return elem.arithmetic_mean;
                         }
                         });
+                    var ozone3 = data.Data.map(function(elem){
+                            if (elem.pollutant_standard == "Ozone 1-hour 1979"){
+                                return elem.arithmetic_mean;
+                         }
+                    });
                     var pm2 = data.Data.map(function(elem){
                         if (elem.pollutant_standard == "PM25 Annual 2006"){
                              return elem.arithmetic_mean;
@@ -258,56 +263,56 @@ function getAPIData() {
                             return elem.arithmetic_mean;
                         }
                     });
-
     
-         
-
-        const ctx2 = document.getElementById('canvas2').getContext('2d');
-        const chart2 = new Chart(ctx2, {
-        type: 'bar',
-                    data: {
-                    labels: st, 
-                    datasets: [{
-                        label: ["Ozone 8-hour 2015"],
-                        data: code,
-                        backgroundColor: ['rgba(54, 162, 235, 0.2)'],
-                        hoverBackgroundColor: "rgba(232,105,90,0.8)",
-                        borderColor: 'rgb(0, 0, 0)',
-                        borderWidth: 0.5
-                    },
-                        
-                    {
-                        label: ["Ozone 1-hour 1979"],
-                        data: am,
-                        backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                        hoverBackgroundColor: "rgba(232,105,90,0.8)",
-                        borderColor: 'rgb(0, 0, 0)',
-                        borderWidth: 0.5
-                    },
-                    ]
-                    },
-                        options: {
-                            plugins:{
-                                legend: {
-                                    display: true,
-                                    position: 'bottom',
-                                
-                            },
-                            title:{
-                                text: "OZONE LEVELS",
-                                display: true,
-                                font: {
-                                    weight: 'bold',
-                                    size: 20
-                            },
-                            }
-                            
-                        }
-                    }
-                        
-                    });
+        
                     
-
+                    const ctx2 = document.getElementById('canvas2').getContext('2d');
+                    const chart2 = new Chart(ctx2, {
+                    type: 'bar',
+                                data: {
+                                labels: anotherst, 
+                                datasets: [{
+                                    label: ["Ozone 8-hour 2015"],
+                                    data: ozone1,
+                                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                    hoverBackgroundColor: "rgba(232,105,90,0.8)",
+                                    borderColor: 'rgb(0, 0, 0)',
+                                    borderWidth: 0.5
+                                },
+                                {
+                                 
+                                    label: ["Ozone 1-hour 1979"],
+                                    data: ozone2,
+                                    backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                                    hoverBackgroundColor: "rgba(232,105,90,0.8)",
+                                    borderColor: 'rgb(0, 0, 0)',
+                                    borderWidth: 0.5
+                                },
+                                
+                                ]
+                                },
+                                options: {
+                                    plugins:{
+                                        legend: {
+                                            display: true,
+                                            position: 'bottom',
+                                        
+                                    },
+                                    title:{
+                                        text: "OZONE LEVELS",
+                                        display: true,
+                
+                                        font: {
+                                            weight: 'bold',
+                                            size: 20
+                                        },
+                                    }
+                                }
+                                    
+                                }
+                                
+                            });
+                
                     
 
     const ctx = document.getElementById('canvas').getContext('2d');
@@ -316,14 +321,6 @@ function getAPIData() {
                 data: {
                 labels: st, 
                 datasets: [{
-                 /*   label: ["Ozone 8-hour 2015"],
-                    data: code,
-                    backgroundColor: ['rgba(54, 162, 235, 0.2)'],
-                    hoverBackgroundColor: "rgba(232,105,90,0.8)",
-                    borderColor: 'rgb(0, 0, 0)',
-                    borderWidth: 0.5
-                },
-                {*/
                     label: ["PM25 24-hour 2006"],
                     data: pm,
                     backgroundColor: 'rgba(255, 99, 132, 0.2)',
@@ -379,66 +376,7 @@ function getAPIData() {
                 
             });
 
-        
-
-        
-/*
-            var am = data.Data.map(function(elem){
-                if (elem.pollutant_standard == "Ozone 1-hour 1979"){
-                    return elem.arithmetic_mean;
-                }
-                });
-            var code = data.Data.map(function(elem){
-                if (elem.pollutant_standard == "Ozone 8-hour 2015"){
-                    return elem.arithmetic_mean;
-                }
-            });
-
-        const ctx2 = document.getElementById('canvas2').getContext('2d');
-        const chart2 = new Chart(ctx2, {
-        type: 'bar',
-                    data: {
-                    labels: st, 
-                    datasets: [{
-                        label: ["Ozone 8-hour 2015"],
-                        data: code,
-                        backgroundColor: ['rgba(54, 162, 235, 0.2)'],
-                        hoverBackgroundColor: "rgba(232,105,90,0.8)",
-                        borderColor: 'rgb(0, 0, 0)',
-                        borderWidth: 0.5
-                    },
-                        
-                    {
-                        label: ["Ozone 1-hour 1979"],
-                        data: am,
-                        backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                        hoverBackgroundColor: "rgba(232,105,90,0.8)",
-                        borderColor: 'rgb(0, 0, 0)',
-                        borderWidth: 0.5
-                    },
-                    ]
-                    },
-                        options: {
-                            plugins:{
-                                legend: {
-                                    display: true,
-                                    position: 'bottom',
-                                
-                            },
-                            title:{
-                                text: "OZONE LEVELS",
-                                display: true,
-                                font: {
-                                    weight: 'bold',
-                                    size: 20
-                            },
-                            }
-                            
-                        }
-                    }
-                        
-                    });*/
-                
+    
         
             
 }         
@@ -447,6 +385,9 @@ function getAPIData() {
 
 })}
 )}
+
+
+
  
 
 // Once the user has filled out both the year range and county/city data, call the API (using Fetch?)
