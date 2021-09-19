@@ -250,15 +250,5 @@ function getAPIData() {
 )}
  
 
-// Once the user has filled out both the year range and county/city data, call the API (using Fetch?)
-
-// Analyze that data 
-
-// Generate charts based on the data pulled (using what tools?)
-
-
-
-// Push the charts to html
-
 
  
