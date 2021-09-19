@@ -186,7 +186,7 @@ function getAPIData() {
 
     var state_code;
     // Base url that needs to be added onto with state and county
-    var url = "https://aqs.epa.gov/data/api/annualData/byCounty?email=rachel.peterson.5683@gmail.com&key=tealheron74&param=44201";
+    var url = "https://aqs.epa.gov/data/api/dailyData/byCounty?email=rachel.peterson.5683@gmail.com&key=tealheron74&param=44201,88101";
 
     url += "&bdate=" + year + month + day + "&edate=" + year + month + day;
 
@@ -216,13 +216,17 @@ function getAPIData() {
                     if (this.readyState == 4 && this.status == 200){
                         var data = JSON.parse(this.responseText);
                         var st = data.Data.map(function(elem){
-                    if (elem.pollutant_standard == "Ozone 8-hour 2015"){
-                        return elem.site_number;
+                    if (elem.pollutant_standard == "PM25 24-hour 2006" || elem.pollutant_standard == "PM25 Annual 2006"|| elem.pollutant_standard == "PM25 24-hour 2012"|| elem.pollutant_standard == "PM25 Annual 2012"){
+                        return [elem.local_site_name, elem.poc];
                     }
-                    if (elem.pollutant_standard == "PM 25 24-hour 2012"){
-                        return elem.site_number;
-                    }
+                    
                     });
+                    var anotherst = data.Data.map(function(elem) {
+                        if (elem.pollutant_standard == "PM25 24-hour 2006"){
+                            return elem.site_number;
+                        }
+                        
+                        });
                      console.log(st)
                     var code = data.Data.map(function(elem){
                     if (elem.pollutant_standard == "Ozone 8-hour 2015"){
@@ -230,10 +234,79 @@ function getAPIData() {
                     }
                     });
                     var pm = data.Data.map(function(elem){
-                    if (elem.pollutant_standard == "PM 25 24-hour 2012"){
+                    if (elem.pollutant_standard == "PM25 24-hour 2006"){
                         return elem.arithmetic_mean;
                     }
                     });
+                    var am = data.Data.map(function(elem){
+                        if (elem.pollutant_standard == "Ozone 1-hour 1979"){
+                            return elem.arithmetic_mean;
+                        }
+                        });
+                    var pm2 = data.Data.map(function(elem){
+                        if (elem.pollutant_standard == "PM25 Annual 2006"){
+                             return elem.arithmetic_mean;
+                        }
+                    });
+                    var pm3 = data.Data.map(function(elem){
+                        if (elem.pollutant_standard == "PM25 24-hour 2012"){
+                            return elem.arithmetic_mean;
+                        }
+                        });
+                    var pm4 = data.Data.map(function(elem){
+                        if (elem.pollutant_standard == "PM25 Annual 2012"){
+                            return elem.arithmetic_mean;
+                        }
+                    });
+
+    
+         
+
+        const ctx2 = document.getElementById('canvas2').getContext('2d');
+        const chart2 = new Chart(ctx2, {
+        type: 'bar',
+                    data: {
+                    labels: st, 
+                    datasets: [{
+                        label: ["Ozone 8-hour 2015"],
+                        data: code,
+                        backgroundColor: ['rgba(54, 162, 235, 0.2)'],
+                        hoverBackgroundColor: "rgba(232,105,90,0.8)",
+                        borderColor: 'rgb(0, 0, 0)',
+                        borderWidth: 0.5
+                    },
+                        
+                    {
+                        label: ["Ozone 1-hour 1979"],
+                        data: am,
+                        backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                        hoverBackgroundColor: "rgba(232,105,90,0.8)",
+                        borderColor: 'rgb(0, 0, 0)',
+                        borderWidth: 0.5
+                    },
+                    ]
+                    },
+                        options: {
+                            plugins:{
+                                legend: {
+                                    display: true,
+                                    position: 'bottom',
+                                
+                            },
+                            title:{
+                                text: "OZONE LEVELS",
+                                display: true,
+                                font: {
+                                    weight: 'bold',
+                                    size: 20
+                            },
+                            }
+                            
+                        }
+                    }
+                        
+                    });
+                    
 
                     
 
@@ -241,38 +314,131 @@ function getAPIData() {
     const chart = new Chart(ctx, {
     type: 'bar',
                 data: {
-                labels: st,
+                labels: st, 
                 datasets: [{
-                    label: ["Ozone"],
+                 /*   label: ["Ozone 8-hour 2015"],
                     data: code,
-                    backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'],
+                    backgroundColor: ['rgba(54, 162, 235, 0.2)'],
+                    hoverBackgroundColor: "rgba(232,105,90,0.8)",
+                    borderColor: 'rgb(0, 0, 0)',
+                    borderWidth: 0.5
+                },
+                {*/
+                    label: ["PM25 24-hour 2006"],
+                    data: pm,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
                     hoverBackgroundColor: "rgba(232,105,90,0.8)",
                     borderColor: 'rgb(0, 0, 0)',
                     borderWidth: 0.5
                 },
                 {
-                    label: ["PM 25 "],
-                    data: pm,
-                    backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    ],
+                 
+                    label: ["PM25 Annual 2006"],
+                    data: pm2,
+                    backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                    hoverBackgroundColor: "rgba(232,105,90,0.8)",
+                    borderColor: 'rgb(0, 0, 0)',
+                    borderWidth: 0.5
+                },
+                {
+                    label: ["PM25 24-hour 2012"],
+                    data: pm3,
+                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                    hoverBackgroundColor: "rgba(232,105,90,0.8)",
+                    borderColor: 'rgb(0, 0, 0)',
+                    borderWidth: 0.5
+                },
+                {
+                    label: ["PM25 Annual 2012"],
+                    data: pm4,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     hoverBackgroundColor: "rgba(232,105,90,0.8)",
                     borderColor: 'rgb(0, 0, 0)',
                     borderWidth: 0.5
                 }]
                 },
                 options: {
-                responsive: 'true',
-                stacked: true,
+                    plugins:{
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                        
+                    },
+                    title:{
+                        text: "PM 2.5 LEVELS",
+                        display: true,
+                       // color: "black",
+                        font: {
+                            weight: 'bold',
+                            size: 20
+                        },
+                    }
+                }
+                    
                 }
                 
             });
+
+        
+
+        
+/*
+            var am = data.Data.map(function(elem){
+                if (elem.pollutant_standard == "Ozone 1-hour 1979"){
+                    return elem.arithmetic_mean;
+                }
+                });
+            var code = data.Data.map(function(elem){
+                if (elem.pollutant_standard == "Ozone 8-hour 2015"){
+                    return elem.arithmetic_mean;
+                }
+            });
+
+        const ctx2 = document.getElementById('canvas2').getContext('2d');
+        const chart2 = new Chart(ctx2, {
+        type: 'bar',
+                    data: {
+                    labels: st, 
+                    datasets: [{
+                        label: ["Ozone 8-hour 2015"],
+                        data: code,
+                        backgroundColor: ['rgba(54, 162, 235, 0.2)'],
+                        hoverBackgroundColor: "rgba(232,105,90,0.8)",
+                        borderColor: 'rgb(0, 0, 0)',
+                        borderWidth: 0.5
+                    },
+                        
+                    {
+                        label: ["Ozone 1-hour 1979"],
+                        data: am,
+                        backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                        hoverBackgroundColor: "rgba(232,105,90,0.8)",
+                        borderColor: 'rgb(0, 0, 0)',
+                        borderWidth: 0.5
+                    },
+                    ]
+                    },
+                        options: {
+                            plugins:{
+                                legend: {
+                                    display: true,
+                                    position: 'bottom',
+                                
+                            },
+                            title:{
+                                text: "OZONE LEVELS",
+                                display: true,
+                                font: {
+                                    weight: 'bold',
+                                    size: 20
+                            },
+                            }
+                            
+                        }
+                    }
+                        
+                    });*/
+                
         
             
 }         
