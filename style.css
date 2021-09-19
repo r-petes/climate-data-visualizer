@@ -1,40 +1,27 @@
-#date1Search {
-    width: fit-content;
-    margin-right: 0;
-    margin-left: auto;
-    
-}
-
-#date2Search {
-    width: fit-content;
-    margin-right: auto;
-    margin-left: 0;
-}
-
-#select_state {
-    width: fit-content;
-    margin-top: 1%;
-    margin-bottom: 1%;
-}
-
-#select_county {
-    width: fit-content;
-    margin-top: 1%;
-    margin-bottom: 1%;
-}
-
 #prompt {
     text-align: center;
-    font-family: Montserrat;
-    font-weight: 100;
+    font-weight: bold;
+    font-size: 20pt;
+    background-color: lightgrey;
+    padding: 1em;
 }
 
 #searchBar {
     background: #7B8592;
-    padding: 2%;
+    padding-left: 5em;
+    padding-right: 5em;
+    padding-top: 2em;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
+.form-select {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    align-self: center;
+}
 
 body {
     background: rgba(123, 133, 146, 0.57);
+    font-family: Montserrat;
 }
