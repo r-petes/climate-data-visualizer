@@ -20,14 +20,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     }) 
     .catch((err) => console.log(err));
-
-
 })
 
 
 // If the user has selected a state, populate the counties for that state (the id for the counties are the FIPS codes)
 
-document.getElementById("select_state").onchange = populateCountyDropdown ;
+document.getElementById("select_state").onchange = populateCountyDropdown;
 
 function populateCountyDropdown() {
 
@@ -53,7 +51,67 @@ function populateCountyDropdown() {
     .catch((err) => console.log(err));
 }
 
-document.getElementById("fetch_data_button").addEventListener("click", getAPIData); 
+// Call populateDateDropdowns when the year is clicked on
+document.getElementById("select_year").addEventListener("mousedown", populateDateDropdowns);
+
+// Fill the dropdowns with all possible years and months
+function populateDateDropdowns() {
+
+    for(let i = 0; i <= 40; i++) {
+
+        var year = 1980 + i;
+
+        document.getElementById('select_year').innerHTML += `<option class="dropdown-item">${year.toString()}</option>\r\n`;
+    }
+
+    for(let i = 0; i < 12; i++) {
+
+        var month = i + 1;
+
+        document.getElementById('select_month').innerHTML += `<option class="dropdown-item">${month.toString()}</option>\r\n`;
+    }
+
+    document.getElementById("select_year").removeEventListener("mousedown", populateDateDropdowns);   
+}
+
+document.getElementById("select_month").onchange = populateDayDropdown;
+
+function populateDayDropdown() {
+
+    // Clear the dropdown list
+    document.getElementById("select_day").options.length=0;
+
+    var selected_month = document.getElementById('select_month');
+    var month = selected_month.options[selected_month.selectedIndex].text;
+
+    if(month == "2") {
+
+        for(let i = 0; i < 28; i++) {
+
+            var day = i + 1;
+    
+            document.getElementById('select_day').innerHTML += `<option class="dropdown-item">${day.toString()}</option>\r\n`;
+        }
+    }
+    else if (month == "4" || month == "6" || month == "9" || month == "11") {
+
+        for(let i = 0; i < 30; i++) {
+
+            var day = i + 1;
+    
+            document.getElementById('select_day').innerHTML += `<option class="dropdown-item">${day.toString()}</option>\r\n`;
+        }
+    }
+    else {
+        
+        for(let i = 0; i < 31; i++) {
+
+            var day = i + 1;
+    
+            document.getElementById('select_day').innerHTML += `<option class="dropdown-item">${day.toString()}</option>\r\n`;
+        }
+    }
+}
 
 // Fetch states.json data
 function fetchStates() {
@@ -83,18 +141,30 @@ function fetchState_County_Data() {
     });
 }
 
+//document.getElementById("select_end_date").onchange = getAPIData;
+
 function getAPIData() {
 
     // Get selected state and county divs
     var selected_state = document.getElementById('select_state');
     var selected_county = document.getElementById('select_county');
+    var selected_begin_date = document.getElementById('select_begin_date');
+    var selected_end_date = document.getElementById('select_end_date');
     // Get the value from above
     var state = selected_state.options[selected_state.selectedIndex].text;
     var county = selected_county.options[selected_county.selectedIndex].text;
+    var begin_date = selected_begin_date.options[selected_begin_date.selectedIndex].text;
+    var end_date = selected_end_date.options[selected_end_date.selectedIndex].text;
     var state_code;
     // Base url that needs to be added onto with state and county
-    var url = "https://aqs.epa.gov/data/api/annualData/byCounty?email=rachel.peterson.5683@gmail.com&key=tealheron74&param=44201&bdate=20160101&edate=20160228";
+    var url = "https://aqs.epa.gov/data/api/annualData/byCounty?email=rachel.peterson.5683@gmail.com&key=tealheron74&param=44201";
     
+    console.log(begin_date);
+    console.log(end_date);
+
+    url += "&bdate=" + begin_date + "0101";
+    url += "&edate=" + begin_date + "1231";
+
     // Call function to get states data and compare to dropdown state
     fetchStates().then(function(data) {
         data.forEach(function(states) {
@@ -106,17 +176,14 @@ function getAPIData() {
     });
 
     // Call function to get state_county_data and compare to dropdown county, also finally grab data with base url 
-    //
-    // ** Needs to be reworked **
-    //
     fetchState_County_Data().then(function(data) {
         data.forEach(function(state_county_data) {
             if(county == state_county_data.county_name && state_code == state_county_data.state_code) {
                 url += "&county=" + state_county_data.county_code;
                 console.log(county);
-                /*fetch(url)
+                fetch(url)
                     .then(response => response.json())
-                    .then(data => console.log(data));*/
+                    .then(data => console.log(data));
             }         
         });
     });
