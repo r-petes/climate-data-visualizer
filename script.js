@@ -244,9 +244,6 @@ function getAPIData() {
 }         
 }
 
-
-TEST TEST TEST 
-
 };
 
 })}
