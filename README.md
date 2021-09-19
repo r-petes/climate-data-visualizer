@@ -15,6 +15,8 @@ We built this webpage by using HTML, JavaScript, and CSS (with Bootstrap) to lay
 on the air quality of different locations, we decided to use an EPA API that already has that information and we would pull this data
 based on the user selection of the state, county, and the date they wished to look at.
 
+We used the library Chart.js to make the graphs to show the pollutants based on user selection. 
+
 ## Challenges we ran into
 
 We ran into a lot of challenges working on this project, the biggest issue we had was learning the near libraries/APIs to use them correctly
