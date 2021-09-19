@@ -31,11 +31,20 @@
                 <option selected disabled>Select a county</option>
                 </select>
             </div>
-            <div class="col-6"><input class="form-control" type="search" id="date1Search" placeholder="Enter start date"></div>
-            <div class="col-6"><input class="form-control" type="search" id="date2Search" placeholder="Enter end date"></div>
-            <div class="col-12">
-                <button type="button" class="btn btn-primary" id="fetch_data_button">Primary</button>
-                <div id="fetched_data"></div>
+            <div class="col-4">
+                <select class="form-select" id="select_year">
+                    <option selected disabled>Select a year</option>
+                </select>
+            </div>
+            <div class="col-4">
+                <select class="form-select" id="select_month">
+                    <option selected disabled>Select a month</option>
+                </select>
+            </div>
+            <div class="col-4">
+                <select class="form-select" id="select_day">
+                    <option selected disabled>Select a day</option>
+                </select>
             </div>
             <div class = "ChartBox">
                 <canvas id="canvas"></canvas>
