@@ -213,7 +213,7 @@ function getAPIData() {
             }         
         });
     });
-=======
+
                 var xmlhttp = new XMLHttpRequest();
                 fetch(url)
                     .then(response => response.json())
@@ -253,9 +253,7 @@ function getAPIData() {
 main
 }
 };
-})}
 
-)}
  
 
 // Once the user has filled out both the year range and county/city data, call the API (using Fetch?)
