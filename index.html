@@ -16,21 +16,21 @@
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <title>Climate Data Visualizer</title>
 </head>
-<body class="container"></body>
-    <div id="searchBar">
-        <h1 id="prompt">Enter a zipcode/city and  two dates to compare historical weather data:</h1>
+
+<body class="container">
+    <div class="shadow-lg rounded" id="searchBar">
+        <h1 class="shadow-lg rounded" id="prompt">SELECT YOUR PREFFERED STATE COUNTY, AND DATE TO SEE HISTORICAL PM 2.5 DATA COLLECTED ON THAT DAY. </h1>
+
         <!-- Include search buttons below here -->
         <div class="row">
-            <div class="col-12">
                 <select class="form-select" id="select_state">
                 <option selected disabled>Select a state</option>
                 </select>
-            </div>
-            <div class="col-12">
                 <select class="form-select" id="select_county">
-                <option selected disabled>Select a county</option>
-                </select>
-            </div>
+                    <option selected disabled>Select a county</option>
+                    </select>
+        </div>
+        <div class="row">
             <div class="col-4">
                 <select class="form-select" id="select_year">
                     <option selected disabled>Select a year</option>
