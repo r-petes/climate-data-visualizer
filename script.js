@@ -1,7 +1,4 @@
 
-// TO DO: Drop down menus for the year range? 
-    // Populate based on the API data (from our own JSON file)
-
 // Populate the state dropdown from our JSON, the id of each state will be the FIPS code (used in the API for data retrieval)
 
 document.addEventListener('DOMContentLoaded', function () {
