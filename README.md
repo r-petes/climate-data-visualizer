@@ -3,7 +3,7 @@ Fall '21 OSU Hackathon project, pollutant data visualization web app
 
 ## Inspiration
 
-Data visualization is important for being able to understand the scope of a problem, particularly in regards to climate change and other large, almost unimagineable issues. 
+Data visualization is important for being able to understand the scope of a problem, particularly in regards to climate change and other large, difficult-to-conceptualize issues. 
 
 ## What it does
 
