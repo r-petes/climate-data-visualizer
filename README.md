@@ -1,5 +1,5 @@
 # Pollutant visualizer
-Fall '21 OSU Hackathon project, "New Student" category winner
+Fall '21 Oregon State BeaverHacks hackathon project, "New Student" category winner
 
 ## Inspiration
 
