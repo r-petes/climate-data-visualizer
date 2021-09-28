@@ -1,5 +1,5 @@
 # Pollutant visualizer
-Fall '21 OSU Hackathon project, pollutant data visualization web app
+Fall '21 OSU Hackathon project, "New Student" category winner
 
 ## Inspiration
 
